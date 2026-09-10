@@ -13,6 +13,7 @@ This is a tiny utilities library with commonly used features in Spring applicati
     <groupId>io.github.sivalabs</groupId>
     <artifactId>junit-utils</artifactId>
     <version>0.0.1</version>
+    <scope>test</scope>
 </dependency>
 
 <!-- To use SNAPSHOT version -->
@@ -34,13 +35,14 @@ This is a tiny utilities library with commonly used features in Spring applicati
     <groupId>io.github.sivalabs</groupId>
     <artifactId>junit-utils</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <scope>test</scope>
 </dependency>
 ```
 
 **Gradle**
 
 ```groovy
-implementation 'io.github.sivalabs:junit-utils:0.0.1'
+testImplementation 'io.github.sivalabs:junit-utils:0.0.1'
 
 // To use SNAPSHOT version
 
@@ -52,7 +54,7 @@ repositories {
     maven { url = uri("https://central.sonatype.com/repository/maven-snapshots/") }
 }
 
-implementation 'io.github.sivalabs:junit-utils:0.0.4-SNAPSHOT'
+testImplementation 'io.github.sivalabs:junit-utils:0.0.2-SNAPSHOT'
 
 ```
 
@@ -65,6 +67,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import org.junit.jupiter.params.ParameterizedTest;
+
+import io.github.sivalabs.junitutils.JsonFileSource;
 
 class JsonFileSourceTest {
 
