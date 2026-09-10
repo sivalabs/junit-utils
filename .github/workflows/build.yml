@@ -27,7 +27,12 @@ jobs:
       - name: Build with Maven
         run: ./mvnw -ntp verify
 
+      - name: Read project version
+        id: project
+        run: echo "version=$(./mvnw -q help:evaluate -Dexpression=project.version -DforceStdout)" >> "$GITHUB_OUTPUT"
+
       - name: Publish SNAPSHOT package
+        if: ${{ endsWith(steps.project.outputs.version, '-SNAPSHOT') }}
         env:
           #JRELEASER_MAVENCENTRAL_USERNAME: ${{ secrets.JRELEASER_MAVENCENTRAL_USERNAME }}
           #JRELEASER_MAVENCENTRAL_TOKEN: ${{ secrets.JRELEASER_MAVENCENTRAL_TOKEN }}
@@ -39,5 +44,5 @@ jobs:
           JRELEASER_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           ./mvnw -ntp clean
-          ./mvnw -Ppublication 
+          ./mvnw -Ppublication
           ./mvnw jreleaser:deploy
