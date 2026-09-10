@@ -1,0 +1,28 @@
+name: JUnit Utils Sample
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'junit-utils-sample/**'
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: junit-utils-sample
+    steps:
+      - uses: actions/checkout@v7
+      - name: Set up Java
+        uses: actions/setup-java@v6
+        with:
+          java-version: 21
+          distribution: temurin
+          cache: maven
+          cache-dependency-path: junit-utils-sample/pom.xml
+      - name: Test with Maven
+        run: ./mvnw -ntp test
